@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ログインページ</title>
+</head>
+<body>
+	<h1>ログインページ</h1>
+	<form>
+		<label for="username">ユーザー名:</label>
+		<input type="text" id="username" name="username"><br><br>
+		<label for="password">パスワード:</label>
+		<input type="password" id="password" name="password"><br><br>
+		<button type="button" onclick="login()">ログイン</button>
+	</form>
+	<div id="result"></div>
+	<script>
+		function login() {
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+
+			
+			if (username === "admin" && password === "password123") {
+				document.getElementById("result").innerHTML = "ログイン成功！";
+				return;
+			}
+
+			var xhr = new XMLHttpRequest();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === XMLHttpRequest.DONE) {
+					if (xhr.status === 200) {
+						document.getElementById("result").innerHTML = xhr.responseText;
+					} else {
+						document.getElementById("result").innerHTML = "エラーが発生しました。";
+					}
+				}
+			};
+			xhr.open("POST", "login.php", true);
+			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhr.send("username=" + username + "&password=" + password);
+		}
+	</script>
+</body>
+</html>

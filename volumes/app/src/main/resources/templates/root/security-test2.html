@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>脆弱性テスト用ページ2</title>
+  </head>
+  <body>
+    <h1>脆弱性テスト用ページ2</h1>
+    <p>入力してください。</p>
+    <form>
+      <label for="input">入力欄:</label>
+      <input type="text" id="input" name="input">
+      <button type="button" onclick="showInfo()">情報表示</button>
+    </form>
+    <div id="info" style="display: none;">
+      <p>機密情報？: 今日の夜ご飯は、からあげです。</p>
+    </div>
+    <div id="error" style="display: none;">
+      <p>エラー: 入力が不正です。</p>
+    </div>
+
+    <script>
+      function showInfo() {
+        var input = document.getElementById("input").value;
+        if (input === "test") {
+          document.getElementById("info").style.display = "block";
+          document.getElementById("error").style.display = "none";
+        } else {
+          document.getElementById("info").style.display = "none";
+          document.getElementById("error").style.display = "block";
+        }
+
+        // SQLインジェクション攻撃に対する処理
+        if (input === "admin' OR '1'='1'; DROP TABLE users;--") {
+          alert("攻撃を検知しました！機密情報は「本当はカレー」です");
+        }
+      }
+    </script>
+  </body>
+</html>

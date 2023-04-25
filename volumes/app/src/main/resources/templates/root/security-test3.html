@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>脆弱性テスト用ページ3</title>
+  </head>
+  <body>
+    <h1>脆弱性テスト用ページ3</h1>
+        <p>入力してください。</p>
+    <form>
+      <label for="name">入力欄:</label>
+      <input type="text" id="name" name="name">
+      <button type="button" onclick="showGreeting()">送信</button>
+    </form>
+    <div id="greeting" style="display: none;">
+      <p>送信内容:</p>
+    </div>
+
+    <script>
+      function showGreeting() {
+        var name = document.getElementById("name").value;
+        var greetingDiv = document.getElementById("greeting");
+        greetingDiv.style.display = "block";
+        greetingDiv.innerHTML = "<p>入力した内容は「" + name + "」やで!</p>";
+        if (name.toLowerCase().includes("<script>")) {
+          alert("XSS attack!");
+        }
+      }
+    </script>
+  </body>
+</html>

